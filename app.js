@@ -77,10 +77,10 @@ class Cookie extends Biscuit {
       biscuitDunkability
     );
     this.price = biscuitPrice; // If I want to add more properties to the sub-class
+    // Delete properties what I don't want to use, deletes a property from the super class
+
     delete this.crunchiness; // Delete properties what I don't want to use
   }
-
-  // Delete properties what I don't want to use
 
   slogan() {
     console.log(
@@ -91,6 +91,7 @@ class Cookie extends Biscuit {
 
 const chocolateChip = new Cookie(
   "Chocolate Chip",
+  null, // I don't want to use the crunchiness property
   "Chocolate",
   "Manny's Biscuits",
   5,
@@ -120,3 +121,83 @@ class Animal {
 const animal = new Animal("Dog");
 animal.speak(); // Dog makes a noise.
 animal.poop(); // Dog poops.
+
+// Classes: Inheritance
+class Dog extends Animal {
+  speak() {
+    console.log(`${this.name} barks.`);
+  }
+}
+
+const dog = new Dog("Rex");
+dog.speak(); // Rex barks.
+dog.poop(); // Rex poops.
+
+class FlyingAnimal extends Animal {
+  fly() {
+    console.log(`${this.name} flies.`);
+  }
+}
+
+class Bird extends FlyingAnimal {
+  speak() {
+    console.log(`${this.name} chirps.`);
+  }
+}
+
+const bird = new Bird("Sparrow");
+bird.speak(); // Sparrow chirps.
+bird.poop(); // Sparrow poops. (inherited from Animal)
+bird.fly(); // Sparrow flies.
+
+class Pig extends FlyingAnimal {
+  speak() {
+    console.log(`${this.name} oinks.`);
+  }
+}
+
+const pig = new Pig("Porky");
+pig.speak(); // Porky oinks.
+pig.poop(); // Porky poops. (inherited from Animal)
+pig.fly(); // Porky flies. (inherted from FlyingAnimal)
+
+class Weapon {
+  constructor(name, damage) {
+    this.name = name;
+    this.damage = damage;
+  }
+
+  attack() {
+    console.log(`${this.name} deals ${this.damage} damage.`);
+  }
+}
+
+class Sword extends Weapon {
+  constructor(name, damage, sharpness) {
+    super(name, damage);
+    this.sharpness = sharpness;
+  }
+
+  slash() {
+    console.log(`${this.name} slashes.`);
+  }
+}
+
+const sword = new Sword("Excalibur", 100, "very sharp");
+sword.slash(); // Excalibur slashes.
+sword.attack(); // Excalibur deals 100 damage.
+
+class Bow extends Weapon {
+  constructor(name, damage, range) {
+    super(name, damage);
+    this.range = range;
+  }
+
+  shoot() {
+    console.log(`${this.name} shoots.`);
+  }
+}
+
+const bow = new Bow("Longbow", 50, "long");
+bow.shoot(); // Longbow shoots.
+bow.attack(); // Longbow deals 50 damage.
